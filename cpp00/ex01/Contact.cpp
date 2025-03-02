@@ -1,6 +1,12 @@
 #include <string>
 #include "Contact.hpp"
 
+#include <iostream>
+#include <iomanip>
+#include <ios>
+
+int Contact::totalNbContacts;
+
 Contact::Contact()
 {
     
@@ -26,6 +32,11 @@ void Contact::set_darkest_secret(std::string secret)
     darkest_secret = secret;
 }
 
+int Contact::get_total_contacts()
+{
+    return (totalNbContacts);
+}
+
 std::string Contact::get_first_name()
 {
     return (first_name);
@@ -45,6 +56,19 @@ std::string Contact::get_phone_number()
 std::string Contact::get_darkest_secret()
 {
     return (darkest_secret);
+}
+
+void    Contact::display_contact(int	index)
+{
+	if (index > totalNbContacts || index < 0)
+	{
+		std::cout << "wrong index" << std::endl;
+		return ;
+	}
+	std::cout << "Index      :" << index << std::endl;
+	std::cout << "First name :" << first_name << std::endl;
+	std::cout << "Last name  :" << last_name << std::endl;
+	std::cout << "Nickname   :" << nickname << std::endl;
 }
 
 Contact::~Contact()

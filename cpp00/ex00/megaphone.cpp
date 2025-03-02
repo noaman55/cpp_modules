@@ -3,8 +3,7 @@
 
 void	str_toupper(std::string str)
 {
-	int		i;
-	char	c;
+	unsigned long		i;
 
 	i = 0;
 	while(i < str.size())

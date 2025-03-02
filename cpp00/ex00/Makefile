@@ -1,6 +1,6 @@
 SRCS = megaphone.cpp
 
-OBJ =  $(SRCS:.c=.o)
+OBJ =  $(SRCS:.cpp=.o)
 
 CC = c++
 
@@ -10,7 +10,7 @@ NAME = megaphone
 
 all : $(NAME)
 
-%.o : %.c
+%.o : %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME) : $(OBJ)
