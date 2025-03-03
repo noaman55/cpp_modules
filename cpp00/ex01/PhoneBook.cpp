@@ -13,8 +13,11 @@ PhoneBook::PhoneBook()
 
 void    PhoneBook::addcontact()
 {
+	int	total_contacts;
     if (index > 7)
-        index = 0;
+		index = 0;
+
+	total_contacts = contact[index].get_total_contacts();
     std::string str;
 	std::cout << "fill the first name of the contact: ";
 	std::cin >> str;
@@ -32,8 +35,8 @@ void    PhoneBook::addcontact()
 	std::cin >> str;
     contact[index].set_darkest_secret(str);
     index++;
-    if (contact[index].get_total_contacts < 8)
-        contact_nbr++;
+    if (total_contacts < 8)
+        contact[index].set_total_contacts(total_contacts + 1);
 }
 
 void	print_str(std::string str)
@@ -66,13 +69,15 @@ void	print_line(int index, std::string str2, std::string str3, std::string str4)
 
 void PhoneBook::searchcontact()
 {
+	int	total_contacts;
     int i;
 
     i = 0;
+	total_contacts = contact[0].get_total_contacts();
     std::cout << " ___________________________________________" << std::endl;
     std::cout << "|     Index|First name| Last name|  Nickname|" << std::endl;
     std::cout << "|----------|----------|----------|----------|" << std::endl;
-    while (i < contact_nbr)
+    while (i < total_contacts)
     {
 		print_line(i, contact[i].get_first_name(), contact[i].get_last_name(), contact[i].get_nickname());
         std::cout << std::endl;

@@ -19,6 +19,7 @@ class Contact
         void set_nickname(std::string name);
         void set_phone_number(std::string ph_nbr);
         void set_darkest_secret(std::string secret);
+        static void set_total_contacts(int value);
         static int get_total_contacts();
         std::string get_first_name();
         std::string get_last_name();

@@ -11,6 +11,12 @@ Contact::Contact()
 {
     
 }
+
+void Contact::set_total_contacts(int value)
+{
+    totalNbContacts = value;
+}
+
 void Contact::set_first_name(std::string name)
 {
     first_name = name;
@@ -60,7 +66,7 @@ std::string Contact::get_darkest_secret()
 
 void    Contact::display_contact(int	index)
 {
-	if (index > totalNbContacts || index < 0)
+	if (index >= totalNbContacts || index < 0)
 	{
 		std::cout << "wrong index" << std::endl;
 		return ;
