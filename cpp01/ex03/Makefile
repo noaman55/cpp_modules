@@ -1,10 +1,10 @@
-SRCS = main.cpp Zombie.cpp zombieHorde.cpp
+SRCS = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 
 OBJ =  $(SRCS:.cpp=.o)
 
 CC = c++
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98 #-fsanitize=address 
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = zombieHorde
 
