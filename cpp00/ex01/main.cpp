@@ -12,15 +12,20 @@ int	main(void)
 		do
 		{
 			std::cout << "Please enter one of the following commands: ADD, SEARCH or EXIT: ";
-			std::cin >> str;
-			
+			if(!std::getline(std::cin, str))
+				exit(1);
+			if (!(str == "ADD" || str == "SEARCH" || str == "EXIT"))
+				std::cout << "Invalid command" << std::endl;
 		} while (!(str == "ADD" || str == "SEARCH" || str == "EXIT"));
 
 		if (str == "ADD")
-			phonebook.addcontact();
-		if (str == "SEARCH")
+		{
+			if (phonebook.addcontact() == 1)
+				std::cout << "Invalid input" << std::endl;
+		}
+		else if (str == "SEARCH")
 			phonebook.searchcontact();
-		if (str == "EXIT")
+		else if (str == "EXIT")
 			exit(0);
 	}
 	return (0);

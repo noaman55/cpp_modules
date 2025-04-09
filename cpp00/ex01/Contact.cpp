@@ -68,7 +68,7 @@ void    Contact::display_contact(int	index)
 {
 	if (index >= totalNbContacts || index < 0)
 	{
-		std::cout << "wrong index" << std::endl;
+		std::cout << "invalid index" << std::endl;
 		return ;
 	}
 	std::cout << "Index      :" << index << std::endl;

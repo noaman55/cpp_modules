@@ -7,3 +7,12 @@ Zombie* newZombie( std::string name )
     ptr = new Zombie (name);
     return (ptr);
 }
+
+
+Zombie* newZombie( std::string name )
+{
+    Zombie *ptr;
+
+    ptr = new Zombie (name);
+    return ptr;
+}

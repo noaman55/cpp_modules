@@ -11,7 +11,7 @@ class PhoneBook
 		int		contact_nbr;
 		Contact	contact[8];
 	public:
-		void	addcontact();
+		int	addcontact();
 		void	searchcontact();
 		
 		PhoneBook();
