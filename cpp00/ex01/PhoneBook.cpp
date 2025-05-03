@@ -1,9 +1,3 @@
-#include <iostream>
-#include <iomanip>
-#include <cstdlib>
-#include <ios>
-
-#include "Contact.hpp"
 #include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook()
@@ -22,7 +16,7 @@ int    PhoneBook::addcontact()
 	total_contacts = contact[index].get_total_contacts();
 
 	std::cout << "fill the first name of the contact: ";
-	if(!std::getline(std::cin >> std::ws, str))
+	if(!std::getline(std::cin, str))
 		exit(1);
 	if(str.empty())
 		return 1;

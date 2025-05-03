@@ -55,36 +55,6 @@ int get_level( std::string level)
     return (-1);
 }
 
-// void Harl::complain( std::string level)
-// {
-//     int		index;	
-
-// 	index = get_level(level);
-//     switch (index)
-//     {
-// 		case 0:
-// 			debug();
-// 			info();
-// 			warning();
-// 			error();
-// 			break;
-// 		case 1:
-// 			info();
-// 			warning();
-// 			error();
-// 			break;
-// 		case 2:
-// 			warning();
-// 			error();
-// 			break;
-// 		case 3:
-// 			error();
-// 			break;
-// 		default:
-// 			std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
-//     }
-// }
-
 void Harl::complain( std::string level)
 {
     int		index;	

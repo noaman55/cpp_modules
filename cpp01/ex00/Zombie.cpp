@@ -4,8 +4,10 @@ void    Zombie::announce( void )
 {
     std::cout << m_name << ": BraiiiiiiinnnzzzZ..." << "\n";
 }
+
 Zombie::Zombie(std::string name): m_name (name)
 {
+    
 }
 
 Zombie::~Zombie()

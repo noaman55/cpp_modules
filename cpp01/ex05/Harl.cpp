@@ -65,5 +65,8 @@ void Harl::complain( std::string level)
     if (get_level(level) >= 0)
         (this->*ptrFun[get_level(level)])();
     else
-        std::cout << "" << std::endl;
+    {
+        std::cout << level << ":" << "\n";
+        std::cout << "Unknown level" << std::endl;
+    }
 }

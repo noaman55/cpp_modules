@@ -4,15 +4,6 @@ Zombie* newZombie( std::string name )
 {
     Zombie *ptr;
 
-    ptr = new Zombie (name);
+    ptr = new(std::nothrow) Zombie (name);
     return (ptr);
-}
-
-
-Zombie* newZombie( std::string name )
-{
-    Zombie *ptr;
-
-    ptr = new Zombie (name);
-    return ptr;
 }

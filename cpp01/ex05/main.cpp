@@ -8,6 +8,6 @@ int main( void )
     obj.complain("DEBUG");
     obj.complain("WARNING");
     obj.complain("ERROR");
-    obj.complain("ERR");
+    obj.complain("ABCD");
     return (0);
 }

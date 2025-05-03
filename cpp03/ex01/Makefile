@@ -1,4 +1,4 @@
-SRCS = main.cpp Zombie.cpp zombieHorde.cpp
+SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp
 
 OBJ =  $(SRCS:.cpp=.o)
 
@@ -6,7 +6,7 @@ CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = zombieHorde
+NAME = a.out
 
 all : $(NAME)
 

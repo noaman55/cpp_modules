@@ -1,9 +1,5 @@
-#include <string>
 #include "Contact.hpp"
 
-#include <iostream>
-#include <iomanip>
-#include <ios>
 
 int Contact::totalNbContacts;
 

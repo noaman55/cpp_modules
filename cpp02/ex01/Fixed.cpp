@@ -1,73 +1,67 @@
 #include "Fixed.hpp"
-#include <iostream>
-#include <math.h>
+#include <cmath>
 
-const int Fixed::bits = 8;
-
-Fixed::Fixed(): m_value (0)
+Fixed::Fixed()
 {
-    std::cout << "Default constructor called" << std::endl;
-};
-
-Fixed::Fixed(const int value)
-{
-    std::cout << "Int constructor called" << std::endl;
-    m_value = value << bits;
+	m_val = 0;
+	std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const float value)
+Fixed::Fixed(const int val)
 {
-    std::cout << "Float constructor called" << std::endl;
-    m_value = roundf(value * 256);
+	m_val = val << frac_bits;
+	std::cout << "Int constructor called" << std::endl;
 }
 
-Fixed::Fixed (const Fixed& copy): m_value (copy.m_value)
+Fixed::Fixed(const float val)
 {
-    std::cout << "Copy constructor called" << std::endl;
-};
+	m_val = (int)roundf(val * (1 << frac_bits));
+	std::cout << "Float constructor called" << std::endl;
+}
 
-Fixed& Fixed::operator= (const Fixed& fixed_point)
+Fixed::Fixed(const Fixed& copy)
 {
-    std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "Copy constructor called" << std::endl;
+	m_val = copy.m_val;
+}
 
-    if (this == &fixed_point)
-        return (*this);
-        
-    m_value = fixed_point.m_value;
-    return (*this);
+Fixed& Fixed::operator=(const Fixed& nbr)
+{
+	std::cout << "Copy assignment constructor called" << std::endl;
+	if (this == &nbr)
+		return (*this);
+	m_val = nbr.m_val;
+	return (*this);
 }
 
 Fixed::~Fixed()
 {
-    std::cout << "Destructor called" << std::endl;
+	std::cout << "Destructor called" << std::endl;
 }
 
 int Fixed::getRawBits( void ) const
 {
-    std::cout << "getRawBits member function called" << std::endl;
-    return (m_value);
+	std::cout << "getRawBits member function called" << std::endl;
+	return (m_val);
 }
 
 void Fixed::setRawBits( int const raw )
 {
-    m_value = raw;
+	m_val = raw;
 }
 
-float Fixed::toFloat( void ) const
+float	Fixed::toFloat(void) const
 {
-    return (m_value / 256.0);
+	return static_cast <float> (m_val) / (1 << frac_bits);
 }
 
-int Fixed::toInt( void ) const
+int		Fixed::toInt(void) const
 {
-    return (m_value >> 8);
+	return  m_val >> frac_bits;
 }
 
-std::ostream& operator<< (std::ostream& out, const Fixed& point)
+std::ostream& operator<<(std::ostream& out, const Fixed& point)
 {
-    // if ((point.m_value & 255) == 0)
-    //     out << point.toInt();
-    // else
-        out << point.toFloat();
-    return (out);
+	out << point.toFloat();
+	return out;
 }

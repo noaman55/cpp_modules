@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 
 class Zombie
 {
@@ -16,8 +17,6 @@ public:
     ~Zombie();
 };
 
-void randomChump( std::string name );
-Zombie* newZombie( std::string name );
 Zombie* zombieHorde( int N, std::string name );
 
 #endif
