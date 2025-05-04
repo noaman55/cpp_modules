@@ -1,8 +1,9 @@
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(/* args */)
+ClapTrap::ClapTrap(): Name("Unknown"), Hit_points(10),
+	Energy_points(10), Attack_damage(0)
 {
-    std::cout << "ClapTrap " << Name << " has been constructed!" << std::endl;
+    std::cout << "ClapTrap default constructor has been called!" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name): Name(name), Hit_points(10),
@@ -13,15 +14,18 @@ ClapTrap::ClapTrap(std::string name): Name(name), Hit_points(10),
 
 ClapTrap::ClapTrap(const ClapTrap& copy)
 {
-    Name = copy.Name;
+	std::cout << "ClapTrap copy constructor has been called!" << std::endl;
+
+	Name = copy.Name;
 	Hit_points = copy.Hit_points;
 	Energy_points = copy.Energy_points;
 	Attack_damage = copy.Attack_damage;
-
 }
 
 ClapTrap& ClapTrap::operator= (const ClapTrap& obj)
 {
+	std::cout << "ClapTrap assignment operator has been called!" << std::endl;
+
     if (this == &obj)
         return (*this);
 
