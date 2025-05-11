@@ -76,5 +76,20 @@ void ClapTrap::beRepaired(unsigned int amount)
 
 ClapTrap::~ClapTrap()
 {
-    std::cout << "ClapTrap " << Name << " has been destroyed." << std::endl;
+	std::cout << "ClapTrap " << Name << " has been destroyed." << std::endl;
+}
+
+int ClapTrap::get_hit()
+{
+	return Hit_points;
+}
+
+int ClapTrap::get_energy()
+{
+	return Energy_points;
+}
+
+int ClapTrap::get_attack()
+{
+	return Attack_damage;
 }

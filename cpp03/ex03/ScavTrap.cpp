@@ -8,7 +8,7 @@ ScavTrap::ScavTrap(): ClapTrap("Unknown")
 	std::cout << "ScavTrap default constructor has been called!" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string Name): ClapTrap(Name)
+ScavTrap::ScavTrap(std::string name): ClapTrap(name)
 {
 	Hit_points = 100;
 	Energy_points = 50;
@@ -16,7 +16,7 @@ ScavTrap::ScavTrap(std::string Name): ClapTrap(Name)
 	std::cout << "ScavTrap " << Name << " has been constructed!" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& src)
+ScavTrap::ScavTrap(const ScavTrap& src): ClapTrap(src)
 {
 	Name = src.Name;
 	Hit_points = src.Hit_points;

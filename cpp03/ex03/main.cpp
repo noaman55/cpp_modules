@@ -1,24 +1,19 @@
-#include "ClapTrap.hpp"
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
+#include <iostream>
 
 int main() {
-	std	::cout << "=== Creating ScavTrap ===" << std::endl;
-	FragTrap scav("Scavy");
+    std::cout << "Creating DiamondTrap.........\n";
+    DiamondTrap dt("MonsterX");
 
-	std::cout << "\n=== Testing ScavTrap Actions ===" << std::endl;
-	scav.attack("Intruder");
-	scav.takeDamage(30);
-	scav.beRepaired(20);
-	scav.highFivesGuys();
+    std::cout << "\n--- Status Check ---\n";
+    dt.whoAmI();
+    std::cout << "Hit Points: " << dt.get_hit() << std::endl;
+    std::cout << "Energy Points: " << dt.get_energy() << std::endl;
+    std::cout << "Attack Damage: " << dt.get_attack() << std::endl;
 
-	std::cout << "\n=== Creating ClapTrap ===" << std::endl;
-	ClapTrap clap("Clappy");
+    std::cout << "\n--- Action ---\n";
+    dt.attack("TargetDummy");
 
-	std::cout << "\n=== Testing ClapTrap Actions ===" << std::endl;
-	clap.attack("Enemy");
-	clap.takeDamage(5);
-	clap.beRepaired(3);
-
-	std::cout << "\n=== End of main ===" << std::endl;
-	return 0;
+    std::cout << "\nDestroying DiamondTrap.........\n";
+    return 0;
 }
