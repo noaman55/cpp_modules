@@ -5,8 +5,12 @@
 
 class ScavTrap: virtual public ClapTrap
 {
-
 public:
+
+	static const int HP = 100;
+	static const int EP = 50;
+	static const int AD = 20;
+
 	ScavTrap();
 	ScavTrap(std::string Name);
 	ScavTrap(const ScavTrap& src);

@@ -1,22 +1,16 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap()
+FragTrap::FragTrap(): ClapTrap("Unknown", FragTrap::HP, FragTrap::EP, FragTrap::AD)
 {
-	Hit_points = 100;
-	Energy_points = 100;
-	Attack_damage = 30;
 	std::cout << "FragTrap default constructor has been called!" << std::endl;
 }
 
-FragTrap::FragTrap(std::string name): ClapTrap(name)
+FragTrap::FragTrap(std::string Name): ClapTrap(Name, FragTrap::HP, FragTrap::EP, FragTrap::AD)
 {
-	Hit_points = 100;
-	Energy_points = 100;
-	Attack_damage = 30;
 	std::cout << "FragTrap " << Name << " has been constructed!" << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap& src) : ClapTrap(src)
+FragTrap::FragTrap(const FragTrap& src): ClapTrap(src)
 {
 	Name = src.Name;
 	Hit_points = src.Hit_points;
@@ -30,14 +24,13 @@ FragTrap& FragTrap::operator=(const FragTrap& src)
 {
 	std::cout << "FragTrap assignment operator has been called!" << std::endl;
 	
-	if (this == &src)
-		return *this;
-	
-	Name = src.Name;
-	Hit_points = src.Hit_points;
-	Energy_points = src.Energy_points;
-	Attack_damage = src.Attack_damage;
-
+	if (this != &src)
+	{
+		Name = src.Name;
+		Hit_points = src.Hit_points;
+		Energy_points = src.Energy_points;
+		Attack_damage = src.Attack_damage;
+	}
 	return *this;
 }
 
@@ -48,5 +41,12 @@ FragTrap::~FragTrap()
 
 void FragTrap::highFivesGuys(void)
 {
-    std::cout << "🙌 High five, everyone! Let's keep the good vibes going! 🙌" << std::endl;
+	if (Energy_points > 0 && Hit_points > 0)
+	{
+		std::cout << "FragTrap " << Name << " throws a high five! ✋" << std::endl;
+		Energy_points--;
+	}
+	else
+		std::cout << "FragTrap " << Name << " is down... no high fives today — no energy or hit points left." << std::endl;
 }
+    

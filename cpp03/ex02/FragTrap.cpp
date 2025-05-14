@@ -48,5 +48,12 @@ FragTrap::~FragTrap()
 
 void FragTrap::highFivesGuys(void)
 {
-    std::cout << "🙌 High five, everyone! Let's keep the good vibes going! 🙌" << std::endl;
+	if (Energy_points > 0 && Hit_points > 0)
+	{
+		std::cout << "FragTrap " << Name << " throws a high five! ✋" << std::endl;
+		Energy_points--;
+	}
+	else
+		std::cout << "FragTrap " << Name << " is down... no high fives today — no energy or hit points left." << std::endl;
 }
+    

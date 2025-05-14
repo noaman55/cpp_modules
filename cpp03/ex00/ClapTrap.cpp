@@ -26,14 +26,13 @@ ClapTrap& ClapTrap::operator= (const ClapTrap& obj)
 {
 	std::cout << "ClapTrap assignment operator has been called!" << std::endl;
 
-    if (this == &obj)
-        return (*this);
-
-    Name = obj.Name;
-	Hit_points = obj.Hit_points;
-	Energy_points = obj.Energy_points;
-	Attack_damage = obj.Attack_damage;
-
+    if (this != &obj)
+    {
+		Name = obj.Name;
+		Hit_points = obj.Hit_points;
+		Energy_points = obj.Energy_points;
+		Attack_damage = obj.Attack_damage;
+	}
     return (*this);
 }
 
@@ -45,12 +44,12 @@ void ClapTrap::attack(const std::string& target)
         std::cout << "ClapTrap " << Name <<" attacks " << target << ", causing " << Attack_damage << " points of damage!" << std::endl;
     }
 	else
-		std::cout << "ClapTrap " << Name << "can't attack — no energy or hit points left." << std::endl;
+		std::cout << "ClapTrap " << Name << " can't attack — no energy or hit points left." << std::endl;
 }
     
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if (Hit_points - amount > 0)
+	if (Hit_points - (int)amount > 0)
 	{
 		Hit_points -= amount;
 		std::cout << "ClapTrap " << Name << " takes " << amount << " points of damage! Current HP: " << Hit_points << std::endl;

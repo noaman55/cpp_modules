@@ -6,8 +6,8 @@ ClapTrap::ClapTrap(): Name("Unknown"), Hit_points(10),
     std::cout << "ClapTrap default constructor has been called!" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name): Name(name), Hit_points(10),
-    Energy_points(10), Attack_damage(0)
+ClapTrap::ClapTrap(std::string name, int hp, int ep, int ad): Name(name),
+	Hit_points(hp), Energy_points(ep), Attack_damage(ad)
 {
     std::cout << "ClapTrap " << Name << " has been constructed!" << std::endl;
 }
@@ -16,7 +16,7 @@ ClapTrap::ClapTrap(const ClapTrap& copy)
 {
 	std::cout << "ClapTrap copy constructor has been called!" << std::endl;
 
-    Name = copy.Name;
+	Name = copy.Name;
 	Hit_points = copy.Hit_points;
 	Energy_points = copy.Energy_points;
 	Attack_damage = copy.Attack_damage;
@@ -25,15 +25,14 @@ ClapTrap::ClapTrap(const ClapTrap& copy)
 ClapTrap& ClapTrap::operator= (const ClapTrap& obj)
 {
 	std::cout << "ClapTrap assignment operator has been called!" << std::endl;
-	
-    if (this == &obj)
-        return (*this);
 
-    Name = obj.Name;
-	Hit_points = obj.Hit_points;
-	Energy_points = obj.Energy_points;
-	Attack_damage = obj.Attack_damage;
-
+    if (this != &obj)
+    {
+		Name = obj.Name;
+		Hit_points = obj.Hit_points;
+		Energy_points = obj.Energy_points;
+		Attack_damage = obj.Attack_damage;
+	}
     return (*this);
 }
 
@@ -45,12 +44,12 @@ void ClapTrap::attack(const std::string& target)
         std::cout << "ClapTrap " << Name <<" attacks " << target << ", causing " << Attack_damage << " points of damage!" << std::endl;
     }
 	else
-		std::cout << "ClapTrap " << Name << "can't attack — no energy or hit points left." << std::endl;
+		std::cout << "ClapTrap " << Name << " can't attack — no energy or hit points left." << std::endl;
 }
     
 void ClapTrap::takeDamage(unsigned int amount)
 {
-	if (Hit_points - amount > 0)
+	if (Hit_points - (int)amount > 0)
 	{
 		Hit_points -= amount;
 		std::cout << "ClapTrap " << Name << " takes " << amount << " points of damage! Current HP: " << Hit_points << std::endl;
@@ -76,20 +75,5 @@ void ClapTrap::beRepaired(unsigned int amount)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap " << Name << " has been destroyed." << std::endl;
-}
-
-int ClapTrap::get_hit()
-{
-	return Hit_points;
-}
-
-int ClapTrap::get_energy()
-{
-	return Energy_points;
-}
-
-int ClapTrap::get_attack()
-{
-	return Attack_damage;
+    std::cout << "ClapTrap " << Name << " has been destroyed." << std::endl;
 }

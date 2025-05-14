@@ -2,23 +2,36 @@
 #include "ScavTrap.hpp"
 
 int main() {
-    std::cout << "=== Creating ScavTrap ===" << std::endl;
-    ScavTrap scav("Scavy");
+    std::cout << "\n--- Creating a ClapTrap ---\n";
+    ClapTrap clap("CL4P-TP");
 
-    std::cout << "\n=== Testing ScavTrap Actions ===" << std::endl;
-    scav.attack("Intruder");
-    scav.takeDamage(30);
-    scav.beRepaired(20);
+    std::cout << "\n--- Creating a ScavTrap ---\n";
+    ScavTrap scav("SC4V-TP");
+
+    std::cout << "\n--- ClapTrap Attacks ---\n";
+    clap.attack("Bandit");
+    clap.takeDamage(3);
+    clap.beRepaired(2);
+
+    std::cout << "\n--- ScavTrap Attacks ---\n";
+    scav.attack("Vault Hunter");
+    scav.takeDamage(40);
+    scav.beRepaired(25);
+
+    std::cout << "\n--- ScavTrap Enters Guard Mode ---\n";
     scav.guardGate();
 
-    std::cout << "\n=== Creating ClapTrap ===" << std::endl;
-    ClapTrap clap("Clappy");
+    std::cout << "\n--- Testing Energy Depletion on ScavTrap ---\n";
+    for (int i = 0; i < 55; ++i) {
+        scav.attack("TargetDummy");
+    }
 
-    std::cout << "\n=== Testing ClapTrap Actions ===" << std::endl;
-    clap.attack("Enemy");
-    clap.takeDamage(5);
-    clap.beRepaired(3);
+    std::cout << "\n--- Testing Behavior When HP is 0 ---\n";
+    scav.takeDamage(100);  // Should kill it
+    scav.attack("Ghost");
+    scav.beRepaired(10);
+    scav.guardGate();
 
-    std::cout << "\n=== End of main ===" << std::endl;
+    std::cout << "\n--- Destroying Objects ---\n";
     return 0;
 }
