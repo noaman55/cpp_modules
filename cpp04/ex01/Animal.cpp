@@ -36,3 +36,8 @@ void Animal::makeSound() const
 {
     std::cout << "Animal sound is Unknown" << std::endl;
 }
+
+Brain* Animal::getBrain()
+{
+    return NULL;
+}
