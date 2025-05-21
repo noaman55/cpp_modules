@@ -22,7 +22,7 @@ int main() {
     }
 
     std::cout << "\n--- Dealing fatal damage and testing behavior ---\n";
-    dt.takeDamage(999); // Kill it
+    dt.takeDamage(999);
     dt.attack("Ghost");
     dt.beRepaired(10);
     dt.whoAmI();
