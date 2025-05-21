@@ -7,8 +7,8 @@ private:
 
 public:
     MateriaSource();
-    MateriaSource(const AMateria& obj);
-    MateriaSource& operator= (const AMateria& obj);
+    MateriaSource(const MateriaSource& obj);
+    MateriaSource& operator= (const MateriaSource& obj);
     ~MateriaSource();
 
 	virtual void learnMateria(AMateria*);

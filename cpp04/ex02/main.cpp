@@ -5,7 +5,7 @@
 int main() {
     const int size = 4;
     Animal* animals[size];
-    
+
     // Creating half dogs, half cats
     std::cout << "\n--- Animal Construction ---\n";
     for (int i = 0; i < size; i++) {

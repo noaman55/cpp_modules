@@ -1,4 +1,5 @@
-SRCS = main.cpp AMateria.cpp Ice.cpp Cure.cpp Character.cpp MateriaSource.cpp
+SRCS = main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
+
 OBJ =  $(SRCS:.cpp=.o)
 
 CC = c++
@@ -11,9 +12,9 @@ all : $(NAME)
 
 %.o : %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@
-#-fsanitize=address
+
 $(NAME) : $(OBJ)
-	$(CC) $(OBJ)  -o $(NAME)
+	$(CC) $(OBJ) -o $(NAME)
 
 clean :
 	rm -f $(OBJ)

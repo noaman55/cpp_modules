@@ -1,27 +1,36 @@
 #include "Character.hpp"
 
-Character::Character(): Name("unknown")
+Character::Character(): Name("Unknown")
 {
-	head.content = NULL;
-	head.next = NULL;
+	head = new Garbage_coll;
+	head->content = NULL;
+	head->next = NULL;
 	for (int i = 0; i < 4; i++)
 		slots[i] = NULL;
 }
 
 Character::Character(std::string Name): Name(Name)
 {
-	head.content = NULL;
-	head.next = NULL;
+	head = new Garbage_coll;
+	head->content = NULL;
+	head->next = NULL;
 	for (int i = 0; i < 4; i++)
 		slots[i] = NULL;
 }
+
 Character::Character (const Character& obj)
 {
+	head = new Garbage_coll;
+	head->content = NULL;
+	head->next = NULL;
 	this->Name = obj.Name;
-	for (int i = 0; i < 4; i++)
-		delete slots[i];
-	for (int i = 0; i < 4; i++)
-		slots[i] = obj.slots[i]->clone();
+
+	for (int i = 0; i < 4; ++i) {
+		if (obj.slots[i])
+			slots[i] = obj.slots[i]->clone();
+		else
+			slots[i] = NULL;
+	}
 }
 
 Character& Character::operator= (const Character& obj)
@@ -30,7 +39,10 @@ Character& Character::operator= (const Character& obj)
 	{
 		this->Name = obj.Name;
 		for (int i = 0; i < 4; i++)
+		{
 			delete slots[i];
+			slots[i] = NULL;
+		}
 		for (int i = 0; i < 4; i++)
 			slots[i] = obj.slots[i]->clone();
 	}
@@ -40,9 +52,12 @@ Character& Character::operator= (const Character& obj)
 Character::~Character()
 {
 	for (int i = 0; i < 4; i++)
+	{
 		delete slots[i];
+		slots[i] = NULL;
+	}
+	lst_clear(&head);
 }
-
     
 std::string const & Character::getName() const
 {
@@ -51,12 +66,6 @@ std::string const & Character::getName() const
 
 void Character::equip(AMateria* m)
 {
-	// if (m == NULL)
-	// {
-	// 	std::cout << "Unknown Materia" << std::endl;
-	// 	return ;
-	// }
-
     for (int i = 0; i < 4; i++)
 	{
 		if (slots[i] == NULL)
@@ -68,17 +77,38 @@ void Character::equip(AMateria* m)
 	std::cout << "Inventory is full" << std::endl;
 }
 
+void Character::lst_clear(Garbage_coll **head)
+{
+	Garbage_coll *tmp = *head;
+
+	if (!head || !*head)
+		return ;
+
+	while (tmp)
+	{
+		*head = (*head)->next;
+		delete tmp->content;
+		delete tmp;
+		tmp = *head;
+	}
+}
+
 void Character::lst_addBack(Garbage_coll *head, AMateria* value)
 {
 	Garbage_coll *ptr = head;
 
-	while (ptr->next != NULL)
-		ptr = ptr->next;
-	if (ptr->next == NULL)
+	if (head == NULL)
 	{
-		head->content = value;
+		std::cout << "head is NULLLLLLLLLLLLLLLLL" << std::endl;
 		return ;
 	}
+	if (ptr->content == NULL)
+	{
+		ptr->content = value;
+		return ;
+	}
+	while (ptr->next != NULL)
+		ptr = ptr->next;
 	ptr->next = new Garbage_coll;
 	ptr->next->content = value;
 	ptr->next->next = NULL;
@@ -93,7 +123,7 @@ void Character::unequip(int idx)
 	}
     if (slots[idx] != NULL)
 	{
-		lst_addBack(&head, slots[idx]);
+		lst_addBack(head, slots[idx]);
 		slots[idx] = NULL;
 	}
 }
@@ -108,9 +138,3 @@ void Character::use(int idx, ICharacter& target)
 	if (slots[idx])
 		slots[idx]-> use(target);
 }
-
-
-// AMateria* Character::get_slots()
-// {
-//     return slots[0];
-// }

@@ -2,14 +2,17 @@
 
 AMateria::AMateria()
 {
+	std::cout << "Materia default constructor has been called" << std::endl;
 }
 
 AMateria::AMateria(std::string const & type): type(type)
 {
+	
 }
 
 AMateria::AMateria(const AMateria& obj)
 {
+	std::cout << "Materia copy constructor has been called" << std::endl;
 	*this = obj;
 }
 

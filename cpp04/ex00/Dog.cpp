@@ -9,7 +9,6 @@ Dog::Dog()
 Dog::Dog(const Dog& copy): Animal()
 {
     std::cout << "Dog copy constructor has been called" << std::endl;
-
     type = copy.type;
 }
 

@@ -8,7 +8,6 @@ WrongAnimal::WrongAnimal(): type("Unknown")
 WrongAnimal::WrongAnimal(const WrongAnimal& copy)
 {
     std::cout << "WrongAnimal copy constructor has been called" << std::endl;
-
     type = copy.type;
 }
 

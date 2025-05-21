@@ -15,7 +15,7 @@ class Character:public ICharacter
 private:
     std::string Name;
     AMateria* slots[4];
-	Garbage_coll head;
+	Garbage_coll *head;
 
 public:
     Character();
@@ -29,9 +29,7 @@ public:
 	virtual void unequip(int idx);
 	virtual void use(int idx, ICharacter& target);
 	void lst_addBack(Garbage_coll *head, AMateria* value);
-	// AMateria* get_slots();
+	void lst_clear(Garbage_coll **head);
 };
-
-
 
 #endif
