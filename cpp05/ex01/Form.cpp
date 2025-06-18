@@ -1,39 +1,39 @@
 #include "Form.hpp"
 #include <iostream>
 
-Form::Form():name("Unknown form"), status(false), signGrade(1), executeGrade(1)
+Form::Form():name("Unknown form"), status(false), signGrade(1), execGrade(1)
 {
-    std::cout << "Form default constructor has been called" << std::endl;
+	std::cout << "Form default constructor has been called" << std::endl;
 }
 
-Form::Form(const std::string& name, int s_grade, int e_grade): name(name), status(false), signGrade(s_grade), executeGrade(e_grade)
+Form::Form(const std::string& name, int s_grade, int e_grade): name(name), status(false), signGrade(s_grade), execGrade(e_grade)
 {
 	if (s_grade < 1 || e_grade < 1)
 		throw GradeTooHighException();
 	else if (s_grade > 150 || e_grade > 150)
 		throw GradeTooLowException();
-
-    std::cout << name << "'s constructor has been called" << std::endl;
+	std::cout << name << "'s constructor has been called" << std::endl;
 }
 
-Form::Form(const Form& obj): name(obj.name), signGrade(obj.signGrade), executeGrade(obj.executeGrade)
+Form::Form(const Form& obj): name(obj.name), signGrade(obj.signGrade), execGrade(obj.execGrade)
 {
-    status = obj.status;
-    std::cout << "Form copy constructor has been called" << std::endl;
+	status = obj.status;
+	std::cout << "Form copy constructor has been called" << std::endl;
 }
 
 Form& Form::operator= (const Form& obj)
 {
+	std::cout << "Form assignment operator has been called" << std::endl;
     if (this != &obj)
     {
-
+		status = obj.status;
     }
     return *this;
 }
 
 Form::~Form()
 {
-    std::cout << "Form destructor has been called" << std::endl;
+    std::cout << "Form " << name << "'s destructor has been called" << std::endl;
 }
 
 const std::string& Form::getName() const
@@ -53,7 +53,7 @@ int	Form::getSignGrade() const
 
 int	Form::getExecuteGrade() const
 {
-    return executeGrade;
+    return execGrade;
 }
 
 void	Form::beSigned(Bureaucrat& obj)
@@ -66,6 +66,8 @@ void	Form::beSigned(Bureaucrat& obj)
 
 std::ostream& operator<< (std::ostream& out, const Form& obj)
 {
-    out << "Form '" << obj.getName() << "': sign grade " << obj.getSignGrade() << ", execute grade " << obj.getExecuteGrade() << ", status: " << (obj.getStatus() ? "signed" : "not signed") << std::endl;
+    out << "Form '" << obj.getName() << "': sign grade " << obj.getSignGrade()
+		<< ", execute grade " << obj.getExecuteGrade() << ", status: "
+		<< (obj.getStatus() ? "signed" : "not signed") << std::endl;
     return out;
 }

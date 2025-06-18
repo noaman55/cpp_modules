@@ -1,7 +1,7 @@
 #include "Bureaucrat.hpp"
 #include <iostream>
 
-Bureaucrat::Bureaucrat()
+Bureaucrat::Bureaucrat(): name("Unknown"), grade(1)
 {
 	std::cout << "Bureaucrat default constructor has been called" << std::endl;
 }
@@ -24,15 +24,17 @@ Bureaucrat::Bureaucrat(const Bureaucrat& obj):name(obj.name), grade(obj.grade)
 
 Bureaucrat& Bureaucrat::operator= (const Bureaucrat& obj)
 {
+    std::cout << "Bureaucrat assignment operator has been called" << std::endl;
     if (this != &obj)
     {
+        grade = obj.grade;
     }
     return (*this);
 }
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "Bureaucrat destructor has been called" << std::endl;
+	std::cout << "Bureaucrat " << name << "'s destructor has been called" << std::endl;
 }
 
 void Bureaucrat::incrementGrade()
@@ -61,10 +63,16 @@ int Bureaucrat::getGrade() const
     return grade;
 }
 
+// std::ostream& operator<< (std::ostream& out, const Bureaucrat& obj)
+// {
+//     out << obj.getName();
+//     std::cout << ", bureaucrat grade ";
+//     std::cout << obj.getGrade() << ".\n";
+//     return out;
+// }
+
 std::ostream& operator<< (std::ostream& out, const Bureaucrat& obj)
 {
-    out << obj.getName();
-    std::cout << ", bureaucrat grade ";
-    std::cout << obj.getGrade() << ".\n";
+    out << obj.getName() << ", bureaucrat grade " << obj.getGrade();
     return out;
 }

@@ -10,7 +10,7 @@ private:
     const std::string	name;
     bool				status;
 	const int			signGrade;
-	const int			executeGrade;
+	const int			execGrade;
 
 public:
     Form();
