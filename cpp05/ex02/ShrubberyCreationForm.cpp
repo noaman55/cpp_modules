@@ -12,6 +12,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm("Shrubbe
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& obj)
 {
+    *this = obj;
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator= (const ShrubberyCreationForm& obj)
@@ -31,4 +32,10 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 
 void    ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
+    if (getStatus() && executor.getGrade() <= getExecGrade())
+    {
+        std::ofstream outfile((target + "_shrubbery ").c_str());
+        outfile << "ASCII Trees";
+        outfile.close();
+    }
 }

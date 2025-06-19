@@ -51,7 +51,7 @@ int	AForm::getSignGrade() const
     return signGrade;
 }
 
-int	AForm::getExecuteGrade() const
+int	AForm::getExecGrade() const
 {
     return execGrade;
 }
@@ -67,7 +67,7 @@ void	AForm::beSigned(Bureaucrat& obj)
 std::ostream& operator<< (std::ostream& out, const AForm& obj)
 {
     out << "Form '" << obj.getName() << "': sign grade " << obj.getSignGrade()
-		<< ", execute grade " << obj.getExecuteGrade() << ", status: "
+		<< ", execute grade " << obj.getExecGrade() << ", status: "
 		<< (obj.getStatus() ? "signed" : "not signed") << std::endl;
     return out;
 }

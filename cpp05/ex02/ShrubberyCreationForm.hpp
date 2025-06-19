@@ -3,11 +3,13 @@
 
 #include "AForm.hpp"
 #include <iostream>
+#include <fstream>
 
 class ShrubberyCreationForm: public AForm
 {
 private:
     std::string target;
+    
 public:
     
     ShrubberyCreationForm();
@@ -18,8 +20,5 @@ public:
 
     void		execute(Bureaucrat const & executor) const;
 };
-
-
-
 
 #endif

@@ -22,7 +22,7 @@ public:
 	const std::string&	getName() const;
 	bool				getStatus() const;
 	int					getSignGrade() const;
-	int					getExecuteGrade() const;
+	int					getExecGrade() const;
 	void				beSigned(Bureaucrat& obj);
 	virtual void		execute(Bureaucrat const & executor) const = 0;
 
