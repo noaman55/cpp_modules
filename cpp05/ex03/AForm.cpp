@@ -32,7 +32,7 @@ AForm& AForm::operator= (const AForm& obj)
 
 AForm::~AForm()
 {
-    std::cout << "Form " << name << "'s destructor has been called" << std::endl;
+    std::cout << name << "'s destructor has been called" << std::endl;
 }
 
 const std::string& AForm::getName() const

@@ -17,7 +17,7 @@ public:
 	AForm(const std::string& name, int sign_grade, int exec_grade);
 	AForm(const AForm& obj);
 	AForm& operator= (const AForm& obj);
-    ~AForm();
+    virtual ~AForm();
 
 	const std::string&	getName() const;
 	bool				getStatus() const;

@@ -7,12 +7,12 @@
 int main() {
     try {
         Bureaucrat low("LowLevel", 150);
-        Bureaucrat mid("MidLevel", 70);
+        Bureaucrat mid("MidLevel", 40);
         Bureaucrat high("HighLevel", 1);
 
         ShrubberyCreationForm shrubForm("home");
         RobotomyRequestForm robotForm("Bender");
-        PresidentialPardonForm pardonForm("Ford Prefect");
+        PresidentialPardonForm pardonForm("Noaman");
 
         std::cout << "\n--- Signing Forms ---\n";
         try {

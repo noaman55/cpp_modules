@@ -2,7 +2,7 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyCreationForm", 145, 137), target("Unknown")
 {
-    // std::cout << "ShrubberyCreationForm default constructor has been called" << std::endl;
+    std::cout << "ShrubberyCreationForm default constructor has been called" << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target): AForm("ShrubberyCreationForm", 145, 137), target(target)
@@ -27,7 +27,7 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator= (const ShrubberyCreation
 
 ShrubberyCreationForm::~ShrubberyCreationForm()
 {
-    std::cout << "ShrubberyCreationForm destructor has been called" << std::endl;
+    // std::cout << "ShrubberyCreationForm destructor has been called" << std::endl;
 }
 
 void    ShrubberyCreationForm::execute(Bureaucrat const & executor) const
@@ -45,6 +45,7 @@ void    ShrubberyCreationForm::execute(Bureaucrat const & executor) const
         outfile << "       ||       " << std::endl;
         outfile << "       ||       " << std::endl;
         outfile << "       ||       " << std::endl;
+        // outfile << "ASCII Trees";
         outfile.close();
     }
     else

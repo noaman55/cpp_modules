@@ -27,7 +27,7 @@ PresidentialPardonForm& PresidentialPardonForm::operator= (const PresidentialPar
 
 PresidentialPardonForm::~PresidentialPardonForm()
 {
-    std::cout << "PresidentialPardonForm destructor has been called" << std::endl;
+    // std::cout << "PresidentialPardonForm destructor has been called" << std::endl;
 }
 
 void    PresidentialPardonForm::execute(Bureaucrat const & executor) const

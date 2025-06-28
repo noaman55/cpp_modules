@@ -27,7 +27,7 @@ RobotomyRequestForm& RobotomyRequestForm::operator= (const RobotomyRequestForm& 
 
 RobotomyRequestForm::~RobotomyRequestForm()
 {
-    std::cout << "RobotomyRequestForm destructor has been called" << std::endl;
+    // std::cout << "RobotomyRequestForm destructor has been called" << std::endl;
 }
 
 void    RobotomyRequestForm::execute(Bureaucrat const & executor) const
