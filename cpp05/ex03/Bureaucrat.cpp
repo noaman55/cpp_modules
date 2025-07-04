@@ -82,7 +82,7 @@ void	Bureaucrat::executeForm(AForm const & form)
 	}
 	catch(const char* error)
 	{
-		std::cout << name << " " << error << "\n\n";
+		std::cout << "Exception caught: " << name << " " << error << "\n\n";
 	}
 }
 

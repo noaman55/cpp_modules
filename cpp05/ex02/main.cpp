@@ -18,7 +18,7 @@ int main() {
         try {
             low.signForm(shrubForm);  // Should fail
         } catch (std::exception &e) {
-            std::cout << e.what() << std::endl;
+            std::cout << "Exception caught: " << e.what() << std::endl;
         }
 
         mid.signForm(shrubForm);     // Should succeed
@@ -29,15 +29,14 @@ int main() {
         try {
             low.executeForm(shrubForm);  // Should fail (grade too low)
         } catch (std::exception &e) {
-            std::cout << e.what() << std::endl;
+            std::cout << "Exception caught: " << e.what() << std::endl;
         }
-
         mid.executeForm(shrubForm);     // Should create file with trees
         mid.executeForm(robotForm);     // Should drill + succeed/fail randomly
         high.executeForm(pardonForm);   // Should pardon target
 
     } catch (std::exception &e) {
-        std::cerr << "Fatal error: " << e.what() << std::endl;
+        std::cerr << "\nException caught: " << e.what() << std::endl;
     }
 
     return 0;

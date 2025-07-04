@@ -34,7 +34,11 @@ void    ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
     if (getStatus() && executor.getGrade() <= getExecGrade())
     {
-        std::ofstream outfile((target + "_shrubbery ").c_str());
+        std::ofstream outfile((target + "_shrubbery").c_str());
+        if (!outfile)
+        {
+            throw std::runtime_error("can't open the shrubbery file");
+        }
         outfile << "       /\\       " << std::endl;
         outfile << "      /\\*\\      " << std::endl;
         outfile << "     /\\O\\*\\     " << std::endl;

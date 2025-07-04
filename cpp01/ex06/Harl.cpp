@@ -55,7 +55,7 @@ int get_level( std::string level)
     return (-1);
 }
 
-void Harl::complain( std::string level)
+void Harl::complain( sted::string level)
 {
     int		index;	
 

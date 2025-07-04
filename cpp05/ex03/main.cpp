@@ -4,38 +4,6 @@
 #include "PresidentialPardonForm.hpp"
 #include <iostream>
 
-// int main() {
-//     Intern someRandomIntern;
-
-//     std::cout << "\n--- Creating Valid Forms ---\n";
-//     try {
-//         AForm* form1 = someRandomIntern.makeForm("shrubbery creation", "home");
-//         delete form1;
-
-//         std::cout << "\n";
-//         AForm* form2 = someRandomIntern.makeForm("robotomy request", "Bender");
-//         delete form2;
-
-//         std::cout << "\n";
-//         AForm* form3 = someRandomIntern.makeForm("presidential pardon", "Ford Prefect");
-//         delete form3;
-//     }
-//     catch (std::exception& e) {
-//         std::cerr << "Exception: " << e.what() << std::endl;
-//     }
-
-//     std::cout << "\n--- Trying to Create Invalid Form ---\n";
-//     try {
-//         AForm* form4 = someRandomIntern.makeForm("time travel application", "Marty McFly");
-//         delete form4;  // Should not happen
-//     }
-//     catch (std::exception& e) {
-//         std::cerr << "Exception: " << e.what() << std::endl;
-//     }
-
-//     return 0;
-// }
-
 int main() {
     try {
         Intern intern;
@@ -62,19 +30,12 @@ int main() {
         try {
             bob.signForm(*robotForm);  // Should fail (not enough grade)
         } catch (std::exception& e) {
-            std::cerr << e.what() << std::endl;
+            std::cerr << "Exception caught: " << e.what() << std::endl;
         }
 
-        try {
-            bob.executeForm(*robotForm);  // Should also fail
-        } catch (std::exception& e) {
-            std::cerr << e.what() << std::endl;
-        }
+        bob.executeForm(*robotForm);  // Should also fail
 
         std::cout << "\n--- Error Case: Executing Unsigned Form ---\n";
-        AForm* unexistForm = intern.makeForm("abc", "desert");
-        if (!unexistForm)
-             std::cerr << "abc form doesn't exist" << std::endl;
         AForm* unsignedForm = intern.makeForm("shrubbery creation", "desert");
         try {
             alice.executeForm(*unsignedForm);  // Should throw "Form not signed"

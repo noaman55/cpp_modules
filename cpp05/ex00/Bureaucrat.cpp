@@ -63,14 +63,6 @@ int Bureaucrat::getGrade() const
     return grade;
 }
 
-// std::ostream& operator<< (std::ostream& out, const Bureaucrat& obj)
-// {
-//     out << obj.getName();
-//     std::cout << ", bureaucrat grade ";
-//     std::cout << obj.getGrade() << ".\n";
-//     return out;
-// }
-
 std::ostream& operator<< (std::ostream& out, const Bureaucrat& obj)
 {
     out << obj.getName() << ", bureaucrat grade " << obj.getGrade();
