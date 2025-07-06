@@ -1,4 +1,4 @@
-SRCS = main.cpp Serializer.cpp
+SRCS = main.cpp ScalarConverter.cpp
 
 OBJ =  $(SRCS:.cpp=.o)
 

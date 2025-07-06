@@ -3,6 +3,16 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <string>
+
+enum Type
+{
+    CHAR,
+    INT,
+    FLOAT,
+    DOUBLE,
+    UNKNOWN
+};
 
 class ScalarConverter
 {
