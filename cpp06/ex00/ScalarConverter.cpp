@@ -21,6 +21,22 @@ ScalarConverter::~ScalarConverter()
     std::cout << "ScalarConverter destructor has been called" << std::endl;
 }
 
+class error: public std::exception
+{
+    public:
+    const char* what() const throw(){
+        return "Invalid input";
+    }
+};
+
+class errorFlow: public std::exception
+{
+    public:
+    const char* what() const throw(){
+        return "overflow detected";
+    }
+};
+
 bool isChar(std::string input)
 {
     if (input.length() == 3 && input[0] == '\'' && input[2] == '\'')
@@ -102,27 +118,16 @@ bool isDouble(std::string literal)
     return true;
 }
 
-class error: public std::exception
-{
-    public:
-    const char* what() const throw(){
-        return "Invalid input";
-    }
-};
-
 int Detect_Type(std::string input)
 {
     if (isChar(input))
         return CHAR;
     else if (isInt(input))
-    {
-        std::cout << "it's an int" << std::endl;
         return INT;
-    }
-    else if (isFloat(input))
-        return FLOAT;
     else if (isDouble(input))
         return DOUBLE;
+    else if (isFloat(input))
+        return FLOAT;
     else
         throw error();
     return UNKNOWN;
@@ -153,85 +158,142 @@ void    printChar(std::string literal, int type)
     }
 }
 
-void    printfloat(std::string literal, int type)
+void    printInt(std::string literal, int type)
 {
-    std::stringstream	str;
-	int				    c;
+    long long val;
 
-    
-    
+    if (type == CHAR)
+    {
+        std::cout << "int: " << static_cast<int>(literal[1]) << std::endl;
+        return ;
+    }
+
+    val = atoll(literal.c_str());
+    if (val > std::numeric_limits<int>::max() || val < std::numeric_limits<int>::min())
+    {
+        std::cout << "int: overflow detected" << std::endl;
+        return ;
+    }
+    if (type == INT)
+        std::cout << "int: " <<  val << std::endl;
+    else if (type == FLOAT)
+        std::cout << "int: " << static_cast<int>(strtof(literal.c_str(), NULL) ) << std::endl;
+    else if (type == DOUBLE)
+        std::cout << "int: " << static_cast<int>(strtod(literal.c_str(), NULL)) << std::endl;
 }
 
-void	convertFromChar(std::string literal)
+void    printFloat(std::string literal, int type)
 {
-	std::stringstream	str;
-	char				c;
+    float val;
 
-	str << literal[1];
-	str >> c;
-	printChar(literal, CHAR);
-	std::cout << "int: " << static_cast<int>(c) << std::endl;
-	std::cout << "float: " << static_cast<float>(c) << "f" << std::endl;
-	std::cout << "double: " << static_cast<double>(c) << std::endl;
+    if (type == CHAR)
+    {
+        std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(literal[1]) << "f" << std::endl;
+        return ;
+    }
+    val = strtof(literal.c_str(), NULL);
+    // std::cout << std::fixed << val << std::endl;
+    if (val == HUGE_VALF || val ==  -HUGE_VALF)
+    {
+        std::cout << "float: overflow detected" << std::endl;
+        return ;
+    }
+    else if (type == INT)
+        std::cout << "float: " << std::fixed << std::setprecision(1) << static_cast<float>(atoi(literal.c_str())) << "f" << std::endl;
+    else if (type == FLOAT)
+        std::cout << "float: " << std::fixed << std::setprecision(3) << strtof(literal.c_str(), NULL)<< "f" << std::endl;
+    else if (type == DOUBLE)
+        std::cout << "float: " << std::fixed << std::setprecision(3) << static_cast<float>(strtod(literal.c_str(), NULL)) << "f" << std::endl;
 }
 
-void	convertFromInt(std::string literal)
+void    printDouble(std::string literal, int type)
 {
-	std::stringstream	str;
-	int					nb;
-	str << literal;
-	str >> nb;
-    printChar(literal, INT);
-	std::cout << "int: " << nb << std::endl;
-	std::cout << "float: " << static_cast<float>(nb) << "f" << std::endl;
-	std::cout << "double: " << static_cast<double>(nb) << std::endl;
+    if (type == CHAR)
+        std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(literal[1]) << std::endl;
+    else if (type == INT)
+        std::cout << "double: " << std::fixed << std::setprecision(1) << static_cast<double>(atoi(literal.c_str())) << std::endl;
+    else if (type == FLOAT)
+        std::cout << "double: " << std::fixed << std::setprecision(3) << static_cast<double>(strtof(literal.c_str(), NULL)) << std::endl;
+    else if (type == DOUBLE)
+        std::cout << "double: " << std::fixed << std::setprecision(3) << static_cast<double>(strtod(literal.c_str(), NULL)) << std::endl;
 }
 
-
-void	convertFromFloat(std::string literal)
+void	Display(std::string literal, int type)
 {
-	std::stringstream	str;
-	float				nb;
-
-	str << literal;
-	str >> nb;
-    printChar(literal, FLOAT);
-	std::cout << "int: " << static_cast<int>(nb) << std::endl;
-	std::cout << "float: " << nb << "f" << std::endl;
-	std::cout << "double: " << static_cast<double>(nb) << std::endl;
+    printChar(literal, type);
+    printInt(literal, type);
+    printFloat(literal, type);
+    printDouble(literal, type);
 }
 
-void	convertFromDouble(std::string literal)
+void    detectFlowError(std::string literal, int type)
 {
-	std::stringstream	str;
-	double				nb;
+    if (type == INT)
+    {
+        long long val;
 
-	str << literal;
-	str >> nb;
-    printChar(literal, DOUBLE);
-	std::cout << "int: " << static_cast<int>(nb) << std::endl;
-	std::cout << "float: " << static_cast<float>(nb) << "f" << std::endl;
-	std::cout << "double: " << nb << std::endl;
+        val = atoll(literal.c_str());
+        if (val > std::numeric_limits<int>::max() || val < std::numeric_limits<int>::min())
+        {
+            std::cout << "int: ";
+            throw  errorFlow();
+        }
+    }
+    if (type == FLOAT)
+    {
+        float val;
+
+        val = strtof(literal.c_str(), NULL);
+        if (val == HUGE_VALF || val ==  -HUGE_VALF)
+        {
+            std::cout << "float: ";
+            throw  errorFlow();
+        }
+    }
+    if (type == DOUBLE)
+    {
+        double val;
+
+        val = strtod(literal.c_str(), NULL);
+        if (val == HUGE_VAL || val ==  -HUGE_VAL)
+        {
+            std::cout << "double: ";
+            throw  errorFlow();
+        }
+    }
+
+
 }
 
-void ScalarConverter::convert(std::string input)
+void ScalarConverter::convert(std::string literal)
 {
     int type;
     try
     {
-        type = Detect_Type(input);
+        type = Detect_Type(literal);
     }
     catch(const std::exception& e)
     {
         std::cerr << e.what() << '\n';
         return ;
     }
+
+    try
+    {
+        detectFlowError(literal, type);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+        return ;
+    }
+    
     if (type == CHAR)
-		convertFromChar(input);
+		Display(literal, CHAR);
 	else if (type == INT)
-		convertFromInt(input);
-	else if (type == FLOAT)
-		convertFromFloat(input);
+		Display(literal, INT);
 	else if (type == DOUBLE)
-		convertFromDouble(input);
+		Display(literal, DOUBLE);
+	else if (type == FLOAT)
+		Display(literal, FLOAT);
 }

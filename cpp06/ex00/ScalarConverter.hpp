@@ -5,6 +5,10 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <iomanip>
+#include <limits>
+#include <cmath>
+#include <cfloat>
 
 enum Type
 {
