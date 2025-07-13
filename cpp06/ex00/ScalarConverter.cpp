@@ -92,7 +92,9 @@ bool isFloat(std::string literal)
             dot_Flag = 1;
         index++;
     }
-    return true;
+    if (literal[literal.length() - 1] == 'f')
+        return true;
+    return false;
 }
 
 bool isDouble(std::string literal)
@@ -130,7 +132,6 @@ int Detect_Type(std::string input)
         return FLOAT;
     else
         throw error();
-    return UNKNOWN;
 }
 
 void    printChar(std::string literal, int type)
@@ -192,7 +193,6 @@ void    printFloat(std::string literal, int type)
         return ;
     }
     val = strtof(literal.c_str(), NULL);
-    // std::cout << std::fixed << val << std::endl;
     if (val == HUGE_VALF || val ==  -HUGE_VALF)
     {
         std::cout << "float: overflow detected" << std::endl;
@@ -215,7 +215,7 @@ void    printDouble(std::string literal, int type)
     else if (type == FLOAT)
         std::cout << "double: " << std::fixed << std::setprecision(3) << static_cast<double>(strtof(literal.c_str(), NULL)) << std::endl;
     else if (type == DOUBLE)
-        std::cout << "double: " << std::fixed << std::setprecision(3) << static_cast<double>(strtod(literal.c_str(), NULL)) << std::endl;
+        std::cout << "double: " << std::fixed << std::setprecision(3) << strtod(literal.c_str(), NULL) << std::endl;
 }
 
 void	Display(std::string literal, int type)
@@ -265,9 +265,36 @@ void    detectFlowError(std::string literal, int type)
 
 }
 
+
+void    Handling_Special_Cases(std::string literal)
+{
+    if (literal == "+inf" || literal == "+inff")
+    {
+        std::cout << "char: impossible \nint: impossible" << std::endl;
+        std::cout << "float: inff \ndouble: inf" << std::endl;
+    }
+    else if (literal == "-inf" || literal == "-inff")
+    {
+        std::cout << "char: impossible \nint: impossible" << std::endl;
+        std::cout << "float: -inff \ndouble: -inf" << std::endl;
+    }
+    else if (literal == "nan" || literal == "nanf")
+    {
+        std::cout << "char: impossible \nint: impossible" << std::endl;
+        std::cout << "float: nanf \ndouble: nan" << std::endl;
+    }
+}
+
 void ScalarConverter::convert(std::string literal)
 {
     int type;
+
+    if (literal == "-inf" || literal == "+inf" || literal == "-inff"
+        || literal == "+inff" || literal == "nan" || literal == "nanf")
+    {
+        Handling_Special_Cases(literal);
+        return ;
+    }
     try
     {
         type = Detect_Type(literal);
@@ -277,7 +304,6 @@ void ScalarConverter::convert(std::string literal)
         std::cerr << e.what() << '\n';
         return ;
     }
-
     try
     {
         detectFlowError(literal, type);
@@ -287,7 +313,6 @@ void ScalarConverter::convert(std::string literal)
         std::cerr << e.what() << '\n';
         return ;
     }
-    
     if (type == CHAR)
 		Display(literal, CHAR);
 	else if (type == INT)
