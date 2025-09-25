@@ -1,6 +1,7 @@
-#include "Identify.hpp" // Assumes declarations of Base, A, B, C, generate(), identify()
+#include "Identify.hpp"
 
-int main() {
+int main()
+{
     srand(time(0));  // Seed random number generator
 
     std::cout << "---- Randomly generating and identifying 10 instances ----\n";
@@ -15,5 +16,14 @@ int main() {
         delete obj;
     }
 
+    Base* obj = new Base();
+    std::cout << "Object " << 11 << " (pointer): ";
+    identify(obj);
+
+    std::cout << "Object " << 11 << " (reference): ";
+    identify(*obj);
+    std::cout << std::endl;
+    
+    delete obj;
     return 0;
 }

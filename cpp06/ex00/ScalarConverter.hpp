@@ -22,13 +22,11 @@ enum Type
 class ScalarConverter
 {
 private:
-    
-public:
     ScalarConverter();
     ScalarConverter(const ScalarConverter& obj);
     ScalarConverter& operator= (const ScalarConverter& obj);
     ~ScalarConverter();
-
+public:
     static void convert(std::string type);
 };
 

@@ -136,7 +136,7 @@ int Detect_Type(std::string input)
 
 void    printChar(std::string literal, int type)
 {
-    std::stringstream	str;
+    std::stringstream	ss;
 	int				    c;
 
     if (type == CHAR && isprint(literal[1]))   
@@ -145,8 +145,8 @@ void    printChar(std::string literal, int type)
     std::cout << "char: Non displayable" << std::endl;
     else if (type != CHAR)
     {
-        str << literal;
-        str >> c;
+        ss << literal;
+        ss >> c;
         if (0 <= c && c <= 127 && isprint(c))
         {
             
@@ -178,7 +178,7 @@ void    printInt(std::string literal, int type)
     if (type == INT)
         std::cout << "int: " <<  val << std::endl;
     else if (type == FLOAT)
-        std::cout << "int: " << static_cast<int>(strtof(literal.c_str(), NULL) ) << std::endl;
+        std::cout << "int: " << static_cast<int>(strtof(literal.c_str(), NULL)) << std::endl;
     else if (type == DOUBLE)
         std::cout << "int: " << static_cast<int>(strtod(literal.c_str(), NULL)) << std::endl;
 }

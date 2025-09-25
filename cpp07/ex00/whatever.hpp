@@ -2,26 +2,25 @@
 #define WHATEVER_HPP
 
 template <typename T>
-void swap(T &x, T &y)
+void    swap(T& x, T& y)
 {
-    T temp;
-
+    T   temp;
+    
     temp = x;
     x = y;
     y = temp;
 }
 
-
 template <typename T>
-T min(T &x, T &y)
+const T&   min(const T& x, const T& y)
 {
-    return (x < y) ? x : y;
+    return ((x < y) ? x : y);
 }
 
 template <typename T>
-T max(T &x, T &y)
+const T&   max(const T& x, const T& y)
 {
-    return (x > y) ? x : y;
+    return ((x > y) ? x : y);
 }
 
 #endif

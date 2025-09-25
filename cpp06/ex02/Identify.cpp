@@ -9,7 +9,6 @@ Base * generate(void)
 {
     int random;
 
-    // srand(time(0));
     random = rand();
     if (random % 3 == 0)
         return new A;
@@ -37,7 +36,7 @@ void identify(Base& p)
     {
         A& a = dynamic_cast<A&>(p);
         (void)a;
-        std::cout << "xxxxxxxxxThe type of the object pointed to by p is: A" << std::endl;
+        std::cout << "The type of the object pointed to by p is: A" << std::endl;
         return ;
     }
     catch(const std::exception& e)
@@ -49,7 +48,7 @@ void identify(Base& p)
     {
         B& b = dynamic_cast<B&>(p);
         (void)b;
-        std::cout << "xxxxxxxxxThe type of the object pointed to by p is: B" << std::endl;
+        std::cout << "The type of the object pointed to by p is: B" << std::endl;
         return ;
     }
     catch(const std::exception& e)
@@ -61,12 +60,12 @@ void identify(Base& p)
     {
         C& c = dynamic_cast<C&>(p);
         (void)c;
-        std::cout << "xxxxxxxxxThe type of the object pointed to by p is: C" << std::endl;
+        std::cout << "The type of the object pointed to by p is: C" << std::endl;
         return ;
     }
     catch(const std::exception& e)
     {
         // std::cerr << e.what() << '\n';
     }
-    std::cout << "xxxxxxxxxThe type of the object pointed to by p is: Unknown" << std::endl;
+    std::cout << "The type of the object pointed to by p is: Unknown" << std::endl;
 }

@@ -7,7 +7,7 @@ sp.addNumber(6);
 sp.addNumber(3);
 sp.addNumber(17);
 sp.addNumber(9);
-sp.addNumber(11);
+sp.addNumber(27);
 
 // std::cout << sp.vec.size() << std::endl;
 // std::cout << sp.vec.capacity() << std::endl;
