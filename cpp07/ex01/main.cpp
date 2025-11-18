@@ -1,5 +1,4 @@
 #include "iter.hpp"
-#include <iostream>
 
 template <typename T>
 void printElement(T &element) {
