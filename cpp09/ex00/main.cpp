@@ -3,6 +3,7 @@
 #include <fstream>
 #include <unistd.h>
 #include <sstream>
+
 bool is_digits(std::string& str)
 {
 	for (size_t i = 0; i < str.length(); i++)
@@ -13,7 +14,7 @@ bool is_digits(std::string& str)
 	return true;
 }
 
-void	parse_date(std::stringstream date, std::string& line)
+void	parse_date(std::stringstream& date, std::string& line)
 {
 	std::string	year;
 	std::string	month;
@@ -25,7 +26,7 @@ void	parse_date(std::stringstream date, std::string& line)
 
 	if (year.empty() || month.empty() || day.empty())
 		throw error("Error: bad input => " + line);
-	if (is_digits(year) || is_digits(month) || is_digits(day))
+	if (!is_digits(year) || !is_digits(month) || !is_digits(day))
 		throw error("Error: bad input => " + line);
 
 	int	yr = atoi(year.c_str());
@@ -34,6 +35,27 @@ void	parse_date(std::stringstream date, std::string& line)
 
 	if (yr < 2009 || yr > 2025 || mth < 1 || mth > 12 || dy < 1 || dy > 31)
 		throw error("Error: bad input => " + line);
+}
+
+void	parse_value(std::stringstream& value, std::string& line)
+{
+	std::string	amount;
+	std::string	str; // for an extra string after the value
+
+	std::getline(value, amount, ' ');
+	std::getline(value, str, ' ');
+
+	if (amount.empty() || !str.empty())
+		throw error("Error: bad input => " + line);
+	if (!is_digits(amount))
+		throw error("Error: bad input => " + line);
+
+	float	val = atof(amount.c_str());
+
+	if (val < 0)
+		throw error("Error: not a positive number => " + line);
+	else if (val > 1000)
+		throw error("Error: too large a number => " + line);
 }
 
 int	main(int ac, char** av)
@@ -65,14 +87,17 @@ int	main(int ac, char** av)
 		value = line.substr(pos + 2);
 		try
 		{
-			parse_date(date, line);
+			std::stringstream ss_date(date);
+			std::stringstream ss_value(value);
+			parse_date(ss_date, line);
+			parse_value(ss_value, line);
+			std::cout << date << " => " << value << " = " << data_base.calcul_price(date, value) << std::endl;
 		}
 		catch(const std::exception& e)
 		{
 			std::cerr << e.what() << '\n';
 		}
 
-		std::cout << date << " => " << value << " = " << data_base.calcul_price(date, value) << std::endl;
 	}
 
 	return 0;
