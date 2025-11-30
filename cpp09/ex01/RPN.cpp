@@ -50,58 +50,32 @@ void RPN::calcul_rpn()
 			throw error("Error");
 		else if (isdigit(s[0]))
 			_data.push(atoi(&s[0]));
+		else if (_data.size() > 1)
+		{
+			int	a = _data.top();
+			_data.pop();
+			int	b = _data.top();
+			_data.pop();
+			if (s == "+")
+				_data.push(a + b);
+			if (s == "-")
+				_data.push(b - a);
+			if (s == "*")
+				_data.push(a * b);
+			if (s == "/")
+			{
+				if (a != 0)
+					_data.push(b / a);
+				else
+					throw error("Error: division by 0");
+			}
+		}
+		else
+			throw error("Error: not enough operands");
 	}
-	
 
-
-
-
-
-
-
-
-
-
-
-
-
-    // std::string s;
-	// while (std::getline(_input, s, ' '))
-	// {
-	// 	int a;
-	// 	int b;
-
-	// 	// std::cerr << s << " 88" << std::endl;
-	// 	if (s.size() == 1 && isdigit(s[0]))
-	// 		_data.push(atoi(&s[0]));
-	// 	else if ((s == "+" || s == "-" || s == "*" || s == "/") &&  _data.size() > 1)
-	// 	{
-	// 		a = _data.top();
-	// 		_data.pop();
-	// 		b = _data.top();
-	// 		_data.pop();
-	// 	}
-	// 	else
-	// 	{
-	// 		std::cerr << "Error" << std::endl;
-	// 		_exit(1);
-	// 	}
-	// 	if (s == "+")
-	// 		_data.push(a + b);
-	// 	else if (s == "-")
-	// 		_data.push(b - a);
-	// 	else if (s == "*")
-	// 		_data.push(a * b);
-	// 	else if (s == "/")
-	// 	{
-	// 		if (a == 0)
-	// 		{
-	// 			std::cerr << "Error: division by 0" << std::endl;
-	// 			_exit(1);
-	// 		}
-	// 		_data.push(b / a);
-	// 	}
-	// }
-
-	std::cout << _data.top() << std::endl;
+	if (_data.size() == 1)
+		std::cout << _data.top() << std::endl;
+	else
+		throw error("Error: too much operands");
 }
