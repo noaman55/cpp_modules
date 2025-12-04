@@ -22,16 +22,8 @@ private:
 	std::map<std::string , float> data;
 public:
 	BitcoinExchange();
-	BitcoinExchange(const BitcoinExchange& other)
-	{
-		this->data = other.data;
-	};
-	BitcoinExchange& operator= (const BitcoinExchange& other)
-	{
-		if (this != &other)
-			this->data = other.data;
-		return *this;
-	};
+	BitcoinExchange(const BitcoinExchange& other);
+	BitcoinExchange& operator= (const BitcoinExchange& other);
 	~BitcoinExchange();
 
 	void		fill(std::fstream& file);

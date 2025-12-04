@@ -5,13 +5,24 @@
 #include <string>
 #include <sstream>
 #include <iostream>
-#include <unistd.h>
 #include <stdlib.h>
+
+
+class error: public std::exception
+{
+	private:
+		std::string str;
+	public:
+		error(std::string err): str(err) {};
+		~error() _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW {};
+		virtual const char* what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW {return str.c_str();};
+};
+
 
 class RPN
 {
 private:
-    std::stack<int>		_data;
+    std::stack<int>		_numbers;
     std::string			_str;
     std::stringstream	_input;
     

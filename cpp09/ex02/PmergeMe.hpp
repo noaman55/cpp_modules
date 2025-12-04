@@ -7,7 +7,10 @@
 #include <sstream>
 #include <algorithm>
 #include <deque>
+#include <time.h>
 
+#define VECTOR 0
+#define DEQUE 1
 
 class error: public std::exception
 {
@@ -28,10 +31,16 @@ private:
 	int					struggle;
 	public:
 	PmergeMe();
+	PmergeMe(const PmergeMe& othter);
+	PmergeMe& operator= (const PmergeMe& other);
 	~PmergeMe();
-	void	parse_args(std::string& s);
-	void	sort_pairs();
-	void	print_list();
+	// void	parse_args(std::string& s);
+	void	parse_args(char** args);
+	void	binary_insertion(int container_flag, int val, int start, int end);
+	int		binary_search(int container_flag, int val, int low, int high);
+	void	sort_vect();
+	void	sort_deque();
+	void	print_list(std::string str, int flag);
 };
 
 

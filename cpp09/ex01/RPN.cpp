@@ -1,22 +1,12 @@
 #include "RPN.hpp"
 
-class error: public std::exception
-{
-	private:
-		std::string str;
-	public:
-		error(std::string err): str(err) {};
-		~error() _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW {};
-		virtual const char* what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW {return str.c_str();};
-};
-
 RPN::RPN(std::string str): _str(str), _input(_str)
 {
 }
 
 RPN::RPN(const RPN& other):_input(other._str)
 {
-    _data = other._data;
+    _numbers = other._numbers;
     _str = other._str;
 }
 
@@ -24,7 +14,7 @@ RPN& RPN::operator= (const RPN& other)
 {
     if (this != &other)
 	{
-		_data = other._data;
+		_numbers = other._numbers;
 		_str = other._str;
 	}
 	return *this;
@@ -49,23 +39,23 @@ void RPN::calcul_rpn()
 		if (s.size() > 1)
 			throw error("Error");
 		else if (isdigit(s[0]))
-			_data.push(atoi(&s[0]));
-		else if (_data.size() > 1)
+			_numbers.push(atoi(&s[0]));
+		else if (!isdigit(s[0]) && _numbers.size() > 1)
 		{
-			int	a = _data.top();
-			_data.pop();
-			int	b = _data.top();
-			_data.pop();
+			int	a = _numbers.top();
+			_numbers.pop();
+			int	b = _numbers.top();
+			_numbers.pop();
 			if (s == "+")
-				_data.push(a + b);
+				_numbers.push(a + b);
 			if (s == "-")
-				_data.push(b - a);
+				_numbers.push(b - a);
 			if (s == "*")
-				_data.push(a * b);
+				_numbers.push(a * b);
 			if (s == "/")
 			{
 				if (a != 0)
-					_data.push(b / a);
+					_numbers.push(b / a);
 				else
 					throw error("Error: division by 0");
 			}
@@ -74,8 +64,8 @@ void RPN::calcul_rpn()
 			throw error("Error: not enough operands");
 	}
 
-	if (_data.size() == 1)
-		std::cout << _data.top() << std::endl;
+	if (_numbers.size() == 1)
+		std::cout << _numbers.top() << std::endl;
 	else
 		throw error("Error: too much operands");
 }
