@@ -2,45 +2,36 @@
 #define SPAN_HPP
 
 #include <vector>
-#include <algorithm>
-#include <iostream>
+#include <string>
 
-// class error: public std::exception
-// {
-//     public:
-//     const char* what() const throw(){
-//         return "vec is full";
-//     }
-// };
 
-class error
+
+class error: public std::exception
 {
-    private:
-    std::string msg;
-
-    public:
-    error(std::string error):msg(error){};
-    std::string what() const throw(){
-        return msg;
-    }
+	private:
+		std::string str;
+	public:
+		error(std::string err): str(err){}
+		~error() _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW {}
+		virtual const char* what() const _GLIBCXX_TXN_SAFE_DYN _GLIBCXX_NOTHROW {return str.c_str();}
 };
+
 
 class Span
 {
+private:
+	std::vector<int> v;
+	
 public:
-    std::vector<int> vec;
-    unsigned int vecSize;
-    unsigned int vecCapacity;
-public:
-    Span();
-    Span(unsigned int N);
-    ~Span();
+	Span(unsigned int);
+	Span(const Span& other);
+	Span& operator= (const Span& other);
+	~Span();
 
-    void addNumber(int nbr);
-    int shortestSpan();
-    int longestSpan();
+	void	addNumber(int);
+	int		shortestSpan();
+	int		longestSpan();
+	void	genNumbers(size_t element_nbs);
 };
-
-
 
 #endif

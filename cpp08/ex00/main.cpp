@@ -1,41 +1,31 @@
-#include <iostream>
+#include "easyfind.hpp"
 #include <vector>
 #include <list>
-#include "easyfind.hpp"
+#include <iostream>
 
-int main() {
-    // Testing with vector
-    std::vector<int> vec;
-    for (int i = 0; i < 10; ++i)
-        vec.push_back(i * 2); // 0, 2, 4, 6, 8, ...
+int main()
+{
 
-    try {
-        std::vector<int>::iterator it = easyfind(vec, 6);
-        std::cout << "Found in vector: " << *it << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Vector error: " << e.what() << std::endl;
-    }
+	// std::vector<int>::iterator it;
+	std::list<int>::iterator it;
+	// std::vector<int> v;
+	std::list<int> v;
 
-    try {
-        std::vector<int>::iterator it = easyfind(vec, 5);
-        std::cout << "Found in vector: " << *it << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "Vector error: " << e.what() << std::endl;
-    }
+	v.push_back(10);
+	v.push_back(25);
+	v.push_back(3);
+	v.push_back(40);
+	v.push_back(9);
+	try
+	{
+		it = easyfind<std::list<int> >(v, 33);
+		// it = easyfind<std::vector<int> >(v, 11);
+		std::cout << "Number " << *it << " is found" << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
-
-    // Testing with list
-    std::list<int> lst;
-    lst.push_back(10);
-    lst.push_back(20);
-    lst.push_back(30);
-
-    try {
-        std::list<int>::iterator it = easyfind(lst, 20);
-        std::cout << "Found in list: " << *it << std::endl;
-    } catch (const std::exception& e) {
-        std::cerr << "List error: " << e.what() << std::endl;
-    }
-
-    return 0;
+	return 0;
 }

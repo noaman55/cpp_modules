@@ -26,6 +26,8 @@ void	BitcoinExchange::fill(std::fstream& file)
 
 	while(std::getline(file, line))
 	{
+		if (line == "date,exchange_rate")
+			continue;
 		std::string date;
 		std::string exchange_rate;
 		size_t		pos;

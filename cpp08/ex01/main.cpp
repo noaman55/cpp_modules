@@ -1,21 +1,27 @@
 #include "Span.hpp"
+#include <iostream>
+#include <algorithm>
 
 int main()
 {
-Span sp = Span(5);
-sp.addNumber(6);
-sp.addNumber(3);
-sp.addNumber(17);
-sp.addNumber(9);
-sp.addNumber(27);
+	try
+	{
+		Span sp = Span(20000);
+		sp.addNumber(6);
+		sp.addNumber(3);
+		sp.addNumber(17);
+		sp.addNumber(9);
+		sp.addNumber(11);
 
-// std::cout << sp.vec.size() << std::endl;
-// std::cout << sp.vec.capacity() << std::endl;
-for (size_t i = 0; i <  sp.vec.size(); i++)
-    std::cout << sp.vec[i] << std::endl;
+		// sp.genNumbers(20000);
+		std::cout << "Shortest Span is: " << sp.shortestSpan() << std::endl;
+		std::cout << "Longest Span is: " << sp.longestSpan() << std::endl;
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
 
-// return 0;
-std::cout << "longestSpan: " << sp.longestSpan() << std::endl;
-std::cout << "shortestSpan: "<< sp.shortestSpan() << std::endl;
-return 0;
+
+	return 0;
 }
